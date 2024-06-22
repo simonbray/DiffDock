@@ -19,7 +19,7 @@ def randomize_position(data_list, no_torsion, no_random, tr_sigma_max, pocket_kn
     center_pocket = data_list[0]['receptor'].pos.mean(dim=0)
     if pocket_knowledge:
         complex = data_list[0]
-        d = torch.cdist(complex['receptor'].pos, torch.from_numpy(complex['ligand'].orig_pos[0]).float() - complex.original_center)
+        d = torch.cdist(complex['receptor'].pos, torch.from_numpy(complex['ligand'].pos.numpy()[0]).float() - complex.original_center)
         label = torch.any(d < pocket_cutoff, dim=1)
 
         if torch.any(label):
